@@ -1,0 +1,11 @@
+C:/Users/Archit/source/repos/Candy-NLP/out/build/x64-debug/CMakeFiles/test.dir
+C:/Users/Archit/source/repos/Candy-NLP/out/build/x64-debug/CMakeFiles/edit_cache.dir
+C:/Users/Archit/source/repos/Candy-NLP/out/build/x64-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Archit/source/repos/Candy-NLP/out/build/x64-debug/Foundation/CMakeFiles/Candy-NLP.dir
+C:/Users/Archit/source/repos/Candy-NLP/out/build/x64-debug/Foundation/CMakeFiles/test.dir
+C:/Users/Archit/source/repos/Candy-NLP/out/build/x64-debug/Foundation/CMakeFiles/edit_cache.dir
+C:/Users/Archit/source/repos/Candy-NLP/out/build/x64-debug/Foundation/CMakeFiles/rebuild_cache.dir
+C:/Users/Archit/source/repos/Candy-NLP/out/build/x64-debug/Foundation/tests/CMakeFiles/tester.dir
+C:/Users/Archit/source/repos/Candy-NLP/out/build/x64-debug/Foundation/tests/CMakeFiles/test.dir
+C:/Users/Archit/source/repos/Candy-NLP/out/build/x64-debug/Foundation/tests/CMakeFiles/edit_cache.dir
+C:/Users/Archit/source/repos/Candy-NLP/out/build/x64-debug/Foundation/tests/CMakeFiles/rebuild_cache.dir

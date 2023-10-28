@@ -1,0 +1,18 @@
+[
+  {
+    "Name": "Candy-NLP.Commands.Sample",
+    "Command": "C:/Users/Archit/source/repos/Candy-NLP/out/build/x64-debug/Foundation/tests/tester.exe",
+    "Arguments": [
+      "sample"
+    ],
+    "WorkingDirectory": "C:/Users/Archit/source/repos/Candy-NLP/out/build/x64-debug/Foundation/tests",
+    "ProjectFile": "C:/Users/Archit/source/repos/Candy-NLP/Foundation/tests/CMakeLists.txt",
+    "LineNumber": 9,
+    "Environment": {},
+    "ExpectsFailure": false,
+    "PassRegularExpression": null,
+    "FailRegularExpression": null,
+    "TargetName": "tester.exe (Foundation\\tests\\tester.exe)",
+    "TimeoutInMs": -1
+  }
+]

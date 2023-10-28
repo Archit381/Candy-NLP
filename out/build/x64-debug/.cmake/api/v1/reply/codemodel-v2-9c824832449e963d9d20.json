@@ -1,0 +1,104 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "Foundation",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-Foundation-Debug-4626ae59c37ba9e1cb93.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "Foundation",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "Foundation/tests",
+					"jsonFile" : "directory-Foundation.tests-Debug-10c532c630b697899ab5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "Foundation/tests",
+					"targetIndexes" : 
+					[
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"name" : "Candy-NLP",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "Candy-NLP::@03697081e5612e2e24a8",
+					"jsonFile" : "target-Candy-NLP-Debug-4dd11abb6dd042724906.json",
+					"name" : "Candy-NLP",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "tester::@8854b366e8fa7a9bf17d",
+					"jsonFile" : "target-tester-Debug-dba723cc407956e94702.json",
+					"name" : "tester",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Archit/source/repos/Candy-NLP/out/build/x64-debug",
+		"source" : "C:/Users/Archit/source/repos/Candy-NLP"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 5
+	}
+}
