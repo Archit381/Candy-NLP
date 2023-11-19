@@ -42,49 +42,267 @@ unordered_map<string,int> cn_token_counter(const vector<string>& token_vector) {
     return token_map;
 }
 
-vector<string> cn_stop_word_remove(const string& text) {
-    unordered_set<string> stop_words = { "indeed", "they", "in", "fifty", "'re", "herein", "make", "third", "itself",
-                                  "thence", "many", "whereafter", "then", "forty", "does", "along", "between",
-                                  "whereby", "he", "still", "above", "someone", "'re", "out", "not", "she", "'s",
-                                  "anything", "first", "anyone", "five", "latterly", "several", "front", "bottom",
-                                  "wherever", "'re", "sometimes", "show", "go", "have", "anyhow", "with", "to", "as",
-                                  "amount", "further", "anyway", "next", "always", "are", "these", "again", "from",
-                                  "became", "hers", "may", "last", "whenever", "herself", "regarding", "'ve", "more",
-                                  "any", "formerly", "its", "whole", "after", "beforehand", "our", "'ll", "'ve", "mostly",
-                                  "his", "nobody", "everything", "whoever", "a", "except", "whither", "also", "seem", "'m",
-                                  "never", "am", "but", "few", "now", "eleven", "us", "seems", "you", "beside", "under", "been",
-                                  "had", "afterwards", "behind", "even", "take", "'d", "through", "nine", "we", "and",
-                                  "before", "since", "yet", "her", "yourself", "how", "former", "some", "thru", "four", "ours",
-                                  "n't", "nevertheless", "could", "at", "very", "should", "none", "once", "whence", "on", "serious",
-                                  "else", "keep", "empty", "all", "rather", "somewhere", "n't", "their", "used", "against", "'m", "either",
-                                  "by", "ever", "due", "moreover", "be", "well", "why", "elsewhere", "too", "which", "whom", "put", "re", "within",
-                                  "into", "enough", "often", "throughout", "did", "everywhere", "if", "made", "will", "only",
-                                  "yours", "please", "'ve", "than", "thereupon", "here", "such", "during", "full", "myself",
-                                  "back", "my", "because", "was", "no", "ca", "every", "n't", "call", "cannot", "that", "so",
-                                  "side", "nor", "hereby", "ourselves", "wherein", "whatever", "see", "who", "'ll", "done",
-                                  "whereupon", "another", "besides", "name", "fifteen", "has", "various", "'s", "something",
-                                  "nowhere", "twelve", "must", "onto", "become", "twenty", "somehow", "an", "latter", "him",
-                                  "for", "over", "using", "the", "themselves", "other", "sixty", "unless", "one", "therefore",
-                                  "hereupon", "together", "least", "might", "otherwise", "those", "when", "most", "upon", "toward",
-                                  "each", "were", "amongst", "yourselves", "therein", "eight", "move", "becoming", "own", "already", "down",
-                                  "hundred", "same", "himself", "really", "doing", "whose", "ten", "towards", "however", "seeming", "everyone",
-                                  "of", "alone", "beyond", "via", "perhaps", "'ll", "less", "your", "across", "sometime", "i", "give", "or", "neither",
-                                  "nothing", "though", "up", "hence", "without", "although", "off", "until", "much", "hereafter", "where", "thereafter",
-                                  "noone", "becomes", "me", "thereby", "two", "top", "around", "namely", "would", "do", "'d", "this", "among", "them",
-                                  "below", "whereas", "it", "mine", "thus", "about", "'d", "is", "what", "while", "'m", "part", "quite", "just", "can",
-                                  "both", "say", "there", "per", "whether", "others", "almost", "'s", "meanwhile", "three", "being", "six", "seemed", "anywhere", "get"};
 
-    vector<string> token_vector = cn_tokenizer(text);
-    vector<string> filtered_vector;
+vector<string> cleanText(string document) {
     
-    for (const string& word : token_vector) {
-        for (const auto& element : stop_words) {
+    vector<string> article;
+    
+    string sentence;
+
+    for (char c : document) {
+        if (c == '.') {
             
+            article.push_back(sentence);
+            sentence = "";
+
+        }
+        else {
+            sentence = sentence + string(1, c);
         }
     }
 
-    return filtered_vector;
+    vector<string> sentences;
+
+    for (const string& sentence : article) {
+        string cleanedSentence = regex_replace(sentence, regex("[^a-zA-Z]"), " ");
+        cleanedSentence = regex_replace(cleanedSentence, regex("\\s+"), " ");
+        sentences.push_back(cleanedSentence);
+
+    }
+
+    return sentences;
 }
+
+vector<Sentence> Sentence_dict(string document) {
+
+    vector<string> article;
+
+    string sentence;
+
+    for (char c : document) {
+        if (c == '.') {
+
+            article.push_back(sentence);
+            sentence = "";
+
+        }
+        else {
+            sentence = sentence + string(1, c);
+        }
+    }
+
+    vector<Sentence> sentences;
+
+    int id = 0;
+    for (const string& sentence : article) {
+        id++;
+        string cleanedSentence = regex_replace(sentence, regex("[^a-zA-Z]"), " ");
+        cleanedSentence = regex_replace(cleanedSentence, regex("\\s+"), " ");
+
+        Sentence temp = { id,cleanedSentence };
+        sentences.push_back(temp);
+
+    }
+
+    return sentences;
+
+}
+
+
+int cnt_words(const string& sent) {
+    vector<string> words = cn_tokenizer(sent);
+    return words.size();
+}
+
+
+vector<TextData> cnt_i_sent(const vector<string>& sentences) {
+    vector<TextData> txt_data;
+    int id = 0;
+
+    for (const string& sent : sentences) {
+        id++;
+        int wordCount = cnt_words(sent);
+        TextData temp = { id, wordCount };
+        txt_data.push_back(temp);
+    }
+
+    return txt_data;
+}
+
+
+
+vector<frequency> freq_data(const vector<string>& sentences) {
+    int id = 0;
+
+    vector<frequency> freq_list;
+
+    for (const string& sent : sentences) {
+        id++;
+
+        map<string, int> freq_dict;
+        
+        vector<string> words = cn_tokenizer(sent);
+
+        for (string word : words) {
+            transform(word.begin(), word.end(), word.begin(), ::tolower);
+
+            if (freq_dict.find(word) != freq_dict.end()) {
+                freq_dict[word]++;
+            }
+            else {
+                freq_dict[word] = 1;
+            }
+        }
+
+        frequency temp = { id, freq_dict };
+
+        freq_list.push_back(temp);
+    }
+
+    return freq_list;
+}
+
+vector<term_frequency> calc_TF(vector<TextData> txt_list, vector<frequency> freq_list) {
+    vector<term_frequency> tf_scores;
+
+    for (const frequency& data : freq_list) {
+
+        int ID = data.id;
+
+        for (const auto& pair : data.freq_dict) {
+           
+            double score = static_cast<double>(pair.second) / txt_list[ID - 1].word_cnt;
+            
+            term_frequency temp = { data.id,score, pair.first };
+            tf_scores.push_back(temp);
+        }
+
+    }
+    return tf_scores;
+}
+
+
+vector<inverse_frequency> calc_IDF(vector<TextData> txt_list, vector<frequency> freq_list) {
+    vector<inverse_frequency> idf_scores;
+    int cnt = 0;
+
+    for (const frequency& item : freq_list) {
+        cnt++;
+        for (const auto& pair : item.freq_dict) {
+            int val = 0;
+            
+
+            for (const frequency& k : freq_list) {
+                if (k.freq_dict.find(pair.first)!=k.freq_dict.end()) {
+                    val++;
+                }
+            }
+
+            double result = log(static_cast<double>(txt_list.size()) / (val + 1));
+            inverse_frequency temp = { cnt,result,pair.first };
+            idf_scores.push_back(temp);
+        }
+
+    }
+    return idf_scores;
+}
+
+
+vector<tfidf> calc_TFIDF(vector<term_frequency> tf_scores, vector<inverse_frequency> idf_scores) {
+    vector<tfidf> tfidf_scores;
+
+    for (const inverse_frequency& data : idf_scores) {
+        for (const term_frequency& pair : tf_scores) {
+            if (data.key == pair.key and data.id == pair.id) {
+                tfidf temp = { data.id,data.idf_score * pair.tf_score,data.key };
+
+                tfidf_scores.push_back(temp);
+            }
+        }
+    }
+    return tfidf_scores;
+}
+    
+vector<SentenceData> sent_scores(const vector<tfidf>& tfidf_scores, const vector<TextData>& text_data) {
+    vector<SentenceData> sent_data;
+
+    for (const TextData& txt : text_data) {
+        double score = 0;  
+
+        for (const tfidf& t_dict : tfidf_scores) {
+            if (txt.id == t_dict.id) {
+                score += t_dict.tfidf_score;
+            }
+        }
+
+        SentenceData temp = { txt.id, score };
+        sent_data.push_back(temp);
+    }
+
+    return sent_data;
+
+}
+
+string summariser(vector<SentenceData> sent_data, vector<Sentence> sentences_dict) {
+    double cnt = 0;
+    vector<string> summary;
+
+    for (const SentenceData& item : sent_data) {
+        cnt = cnt + item.score;
+    }
+
+    double avg = cnt / sent_data.size();
+
+    for (const SentenceData& data : sent_data) {
+        if (data.score >= (avg * 0.9)) {
+            for (const Sentence& sentence : sentences_dict) {
+                if (data.id == sentence.id) {
+                    summary.push_back(sentence.sentence);
+                    break;
+               }
+            }
+        }
+    }
+
+    string joined_summary;
+
+    for (const string& str : summary) {
+        joined_summary += str;
+
+        if (&str != &summary.back()) {
+            joined_summary += ". ";
+        }
+    }
+
+    return joined_summary;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
